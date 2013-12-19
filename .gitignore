@@ -1,0 +1,6 @@
+/.bundle
+/log/*.log
+/tmp
+public/system
+public/assets
+.sass-cache

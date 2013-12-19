@@ -1,0 +1,5 @@
+== README
+
+Basic user authentication template. Requires Ruby 2.0.0 and Rails 4. 
+
+DO NOT USE IN PRODUCTION as the cookies are not secured or encrypted in any way.
