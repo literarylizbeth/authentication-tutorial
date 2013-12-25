@@ -31,7 +31,8 @@ module Authentication
     def confirm_signed_in
       unless signed_in?
         flash[:warning] = "Please sign in to access this page."
-        redirect_to new_session_url
+        destination = request.get? ? request.url : ""
+        redirect_to new_session_url(destination: destination)
       end
     end
 
