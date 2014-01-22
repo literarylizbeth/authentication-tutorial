@@ -3,8 +3,8 @@ module Authentication
   protected
 
     def current_user
-      if cookies[:user_id]
-        @current_user ||= User.find(cookies[:user_id])
+      if session[:user_id]
+        @current_user ||= User.find(session[:user_id])
       else
         @current_user = nil
       end
@@ -19,13 +19,13 @@ module Authentication
     end
 
     def sign_in(user)
-      cookies.permanent[:user_id] = user.id
+      session[:user_id] = user.id
       current_user = user
     end
 
     def sign_out
+      session[:user_id] = nil
       current_user = nil
-      cookies.delete(:user_id)
     end
 
     def confirm_signed_in
@@ -37,7 +37,7 @@ module Authentication
     end
 
     def confirm_correct_user
-      unless params[:id] == cookies[:user_id]
+      unless params[:id] == session[:user_id]
         flash[:warning] = "You don't have permission to access this page."
         redirect_to root_url
       end
